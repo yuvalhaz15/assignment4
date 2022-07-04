@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block title %}<title>Users page</title>{% endblock %}
+{% block page_title %}
+    {{ super() }}<h1 class="second_title"> Users page</h1>
+{% endblock %}
+
+{% block tohen %}
+
+            <h1 class="register_message">{{ message }}</h1>
+
+            <div class="register_form">
+                <h1 class="register_form">Register Form</h1>
+                <form action="/assignment3_2" method="post">
+                    <input type="text" name="user_name" placeholder="User Name" autocomplete="on" required>
+                    <input type="password" name="password" placeholder="********" required>
+                    <input type="email" name="email" placeholder="exm@gmail.com">
+                    <input type="text" name="name" placeholder=" Name">
+                    <input type="submit" value="register">
+                </form>
+            </div>
+
+
+    </div>
+
+
+{% endblock %}

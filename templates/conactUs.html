@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/cssDesign.css') }}">
+    <script defer="" src="{{ url_for('static',filename='js/jsCode.js') }}"></script>
+    <title>Document</title>
+</head>
+
+<body>
+<img src="{{ url_for('static',filename='img/backgroundImage.jpg') }}" class="backgroundImage">
+
+<div id="container">
+    <header>
+        <a href="#" class="hamburgerMenu">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+
+
+            <nav>
+                <ul class="nav">
+                    <li><a href="{{ url_for('display_home_page') }}">Home Page</a></li>
+                    |
+                    <li><a href="{{ url_for('display_conact_us') }}">Conact Us</a></li>
+                    |
+                    <li><a href="{{ url_for('display_hobbies_page') }}">Hobbies</a></li>
+                    |
+                    <li><a href="{{ url_for('display_users_page') }}">Users</a></li>
+                </ul>
+            </nav>
+
+            <nav>
+                <ul class="navForMobileDisplay">
+                    <li><a href="{{ url_for('display_home_page') }}">Home Page</a></li>
+                    |
+                    <li><a href="{{ url_for('display_conact_us') }}">Conact Us</a></li>
+                    |
+                    <li><a href="{{ url_for('display_hobbies_page') }}">Hobbies</a></li>
+                </ul>
+            </nav>
+
+    </header>
+    <div class="popup">
+        <button id="close">&times;</button>
+        <h2>Nice to see you here</h2>
+
+        <img src="{{ url_for('static',filename='img/smily.png') }}">
+    </div>
+
+    <div class="contactUsMain">
+        <h1 class="contactUsMain" id="contactUsHeader">Contact-Us </h1>
+
+    </div>
+    <div class="contactInformation">
+        <span class="contactInformation" id="contactInformationHeadear">Contact Information</span><br>
+        <form class="contactForm" action="URL" method="post">
+            <label class="contactDetails" for="FirstName">First name</label><br>
+            <input type="text" id="FirstName" name="FirstName" minlength="2" maxlength="15" autocomplete="on"
+                   pattern="^[a-zA-Z]*" title="First name must contain only letters" required><br>
+            <label class="contactDetails" for="LastName">LastName </label><br>
+            <input type="text" id="LastName" name="LastName" minlength="2" maxlength="25" autocomplete="on"
+                   pattern="^[a-zA-Z]*" title="Last name must contain only letters" required><br>
+            <label class="contactDetails" for="email">Email</label><br>
+            <input type="email" id="email" name="email"><br>
+            <label class="contactDetails" for="phoneNumber">phoneNumber</label><br>
+            <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0][5][0-9]-[0-9]{7}" required>
+            <small class="contactDetails">Format: 05*-*******</small><br>
+            <input type="checkbox" id="termsCheckBox" name="termsCheckBox" required>
+            <label class="contactDetails" id="termsAgreeLabel" for="termsCheckBox">I agree the terms of
+                conact</label><br><br>
+            <input class="formActionButton" id="resetButton" type="reset">
+            <input class="formActionButton" id="submitButton" type="submit">
+    </div>
+</div>
+
+</body>
+</html>

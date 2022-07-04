@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/cssDesign.css') }}">
+    <script defer="" src="{{ url_for('static',filename='js/jsCode.js') }}"></script>
+    <title>Document</title>
+</head>
+
+
+<body>
+<img src="{{ url_for('static',filename='img/backgroundImage.jpg') }}" class="backgroundImage">
+<div id="container">
+
+    <header>
+        <nav>
+            <ul class="nav">
+                <li><a href="{{ url_for('display_home_page') }}">Home Page</a></li>
+                |
+                <li><a href="{{ url_for('display_conact_us') }}">Conact Us</a></li>
+                |
+                <li><a href="{{ url_for('display_hobbies_page') }}">Hobbies</a></li>
+                |
+                <li><a href="{{ url_for('display_users_page') }}">Users</a></li>
+            </ul>
+        </nav>
+
+
+        <a href="#" class="hamburgerMenu">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </a>
+
+        <nav>
+            <ul class="navForMobileDisplay">
+                <
+                <li><a href="{{ url_for('display_home_page') }}">Home Page</a></li>
+                |
+                <li><a href="{{ url_for('display_conact_us') }}">Conact Us</a></li>
+                |
+                <li><a href="{{ url_for('display_hobbies_page') }}">Hobbies</a></li>
+            </ul>
+        </nav>
+
+    </header>
+    <div class="popup">
+        <button id="close">&times;</button>
+        <h2>Nice to see you here</h2>
+
+        <img src="{{ url_for('static',filename='img/smily.png') }}">
+    </div>
+
+    <div class="homePageHeader">
+        <h1 class="homePageHeader">Yuval's page</h1>
+        <span class="homePageHeader" id="welcomeHeader">Welcome to yuval's page </span>
+    </div>
+
+</div>
+
+</body>
+</html>

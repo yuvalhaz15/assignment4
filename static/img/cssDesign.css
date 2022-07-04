@@ -1,0 +1,227 @@
+
+
+  #container {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-areas: 
+    'Header Header Header'
+    'Title Title Title'
+    'Nav Main asdie';
+    grid-gap: 0.2rem;
+}
+
+.header{
+    grid-area: Header;
+  }
+
+
+
+
+.backgroundImage {
+width: 100vw;
+height: 100vh;
+position: absolute;
+top: 0;
+right: 0;
+z-index: -1;
+  
+  } 
+
+
+  .contactForm {
+    width: 150px;
+    margin: 0 auto;
+}
+
+
+.homePageHeader
+{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    
+}
+
+h1.homePageHeader{
+    font-size: 60px; 
+    padding: 20px ;
+    margin: 20px;
+    border: none;
+    grid-area: Title;
+}
+span.homePageHeader{
+   
+
+    font-size:30px;
+}
+.contactUsMain{
+    display: flex; 
+    flex-direction: column; 
+     align-items: center;
+}
+#contactUsHeader{
+    font-size:60px; 
+    padding: 20px ;
+    margin: 20px;
+    grid-area:Title ;
+
+}
+.contactInformation{
+    display: flex; 
+    flex-direction: column;  
+    align-items: center;
+    grid-area: Main;
+
+}
+#contactInformationHeadear{
+    font-size:30px; 
+    margin: 20px;
+}
+label.contactDetails{
+    font-weight:bold;
+}
+small.contactDetails{
+    color: rgb(241, 8, 8);
+
+}
+#termsAgreeLabel{
+font-size: x-small;
+}
+#resetButton{
+     margin-top: 10px;
+     margin-left: 12px;
+     margin-right: 17px;
+     margin-bottom: 5px;
+}
+ul.nav li {
+    display: inline;
+   }
+
+#welcomeHeader{
+animation-name: welcomeTitle;
+ animation-duration: 5s;
+transition-timing-function: ease;
+grid-area: Main;
+
+}
+@keyframes welcomeTitle {
+    from {font-size: 0;}
+    to{font-size: 30;}
+    from{background-color: red;}
+    to{background-color: blue;}
+}
+.active {
+    background-color: rgb(187, 127, 255);
+}
+.popup{
+    background-color: #ffffff;
+    width: 450px;
+    padding: 30px 40px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+    border-radius: 8px;
+    font-family: "Poppins",sans-serif;
+    display: none;
+    text-align: center;
+}
+.popup button{
+    display: block;
+    margin:  0 0 20px auto;
+    background-color: transparent;
+    font-size: 30px;
+    color: #c5c5c5;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.popup p{
+    font-size: 14px;
+    text-align: center;
+    margin: 20px 0;
+    line-height: 25px;
+}
+.popup a{
+    display: block;
+    width: 150px;
+    position: relative;
+    margin: 10px auto;
+    text-align: center;
+    background-color: #0f72e5;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 0;
+}
+
+.bar1, .bar2, .bar3{
+    width: 35px;
+    height: 5px;
+    background-color: black;
+    margin: 6px 0;
+    display:none;
+}
+.hamburgerMenu{
+border-color: blueviolet;
+}
+@media  only screen and (min-width: 600px) {
+.navForMobileDisplay{
+
+    display:none;
+}
+
+}
+
+@media  only screen and (max-width: 600px) {
+    .backgroundImage {
+     display: none;
+    }
+    .popup{
+        display: none;
+    }
+   body{
+    background-image: url("../static/dog.jpeg");
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%; 
+       }
+   #container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    'Header '
+    'Title'
+    'Main';
+   }
+  #contactUsHeader{
+    font-size : 2em;
+   }
+  .nav{
+  display: none;
+ }
+ label.contactDetails{
+    font-size:1em;
+}
+#contactInformationHeadear{
+    font-size:2em; 
+   
+}
+
+  .bar1, .bar2, .bar3{
+    display: flex;
+   }
+
+   #welcomeHeader{
+ font-size: 20px;
+ color: chocolate
+
+
+   }
+
+
+   h1.homePageHeader{
+    font-size:30px;
+    color: chocolate;
+    grid-area: Title;
+   }
+  }
