@@ -1,22 +1,27 @@
 {% extends 'base.html' %}
 
 
-{% block title %}<title>Users page</title>{% endblock %}
+{% block title %}<title>Users2 page</title>{% endblock %}
 {% block page_title %}
-    {{ super() }}<h1 class="second_title"> Users page</h1>
+    {{ super() }}<h1 class="second_title"> Users2 page</h1>
 {% endblock %}
 
 {% block tohen %}
+  <div class="users2_container">
+    {% for user in users %}
+            <h1 class="users2_list">Name:&nbsp {{ user.name }} &nbsp Email:&nbsp {{ user.email }} &nbsp User Name:&nbsp {{ user.user_Name }}</h1>
+     {% endfor %}
 
-            <h1 class="register_message">{{ message }}</h1>
-
-            <div class="register_form">
-                <h1 class="register_form">Register Form</h1>
-                <form action="/assignment3_2" method="post">
+            {% if message %}
+                <h1 class="insert_message">{{ message }}</h1>
+            {% endif %}
+            <div class="insert_form">
+                <h1 class="insert_form">Register Form</h1>
+                <form action="/insert" method="post">
                     <input type="text" name="user_name" placeholder="User Name" autocomplete="on" required>
                     <input type="password" name="password" placeholder="********" required>
-                    <input type="email" name="email" placeholder="exm@gmail.com">
-                    <input type="text" name="name" placeholder=" Name">
+                    <input type="email" name="email" placeholder="exm@gmail.com" required>
+                    <input type="text" name="name" placeholder=" Name" required>
                     <input type="submit" value="register">
                 </form>
             </div>

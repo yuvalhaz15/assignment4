@@ -1,7 +1,12 @@
 import os
 import mysql.connector
-from flask import Blueprint, render_template, request, redirect, jsonify
+from flask import Flask ,Blueprint, render_template, request, redirect, jsonify
+from flask import url_for
+from datetime import timedelta
+from flask import session
 import requests
+import asyncio
+import aiohttp
 from dotenv import load_dotenv
 
 assignment_4 = Blueprint('assignment_4', __name__,
@@ -35,28 +40,29 @@ def interact_db(query, query_type: str):
 @assignment_4.route('/assignment_4')
 def genreal():
     query = 'select * from users'
-    users_list = interact_db(query, query_type='fetch')
-    return render_template('assignment_4.html', users=users_list)
+    users = interact_db(query, query_type='fetch')
+    return render_template('assignment_4.html', users=users)
 
 
-@assignment_4.route('/assignment_4/insert_user', methods=['GET', 'POST'])
-def index():
-    username = request.form['username']
+@assignment_4.route('/insert', methods=['GET', 'POST'])
+def insert_user():
+ if request.method == 'POST':
+    username = request.form['user_name']
     name = request.form['name']
     email = request.form['email']
     password = request.form['password']
     query = 'select * from users'
     users = interact_db(query, query_type='fetch')
     for user in users:
-        if name == user.name:
-            return render_template('assignment_4.html', users=users)
+        if email == user.email:
+            return render_template('assignment_4.html', users=users,message='email already exist')
 
     query = "INSERT INTO users(user_Name, name, email, password) VALUES ('%s','%s', '%s', '%s')" % (username, name,
                                                                                                     email, password)
     interact_db(query=query, query_type='commit')
     query = 'select * from users'
     users = interact_db(query, query_type='fetch')
-    return render_template('assignment_4.html', users=users, message="changes made!")
+    return render_template('assignment_4.html', users=users, message='user added ')
 
 
 @assignment_4.route('/assignment_4/update_user', methods=['GET', 'POST'])
