@@ -13,9 +13,14 @@
 .header{
     grid-area: Header;
   }
+.get_jason_button{
+   background-color: #4CAF50
+}
+.get_jason_title{
 
-
-
+    font-size:20px;
+    color: cornflowerblue;
+}
 
 .backgroundImage {
 width: 100vw;
@@ -142,6 +147,19 @@ h1.register_form{
 
 }
 h1.insert_form{
+    font-size: 20px;
+    text-align: center;
+   color: red;
+}
+h1.update_form{
+    font-size: 20px;
+    text-align: center;
+   color: red;
+
+
+}
+
+h1.delete_form{
     font-size: 20px;
     text-align: center;
    color: red;

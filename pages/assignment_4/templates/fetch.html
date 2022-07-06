@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block title %}<title>Fetch frontend and backend</title>{% endblock %}
+{% block page_title %}
+    {{ super() }}<h1 class="second_title"> Fetch frontend and backend</h1>
+{% endblock %}
+
+
+{% block tohen %}
+
+    <h1>Fetch - FrontEnd</h1>
+
+
+      <form action="#" id="fetch_frontend" onsubmit="return myFunction(document.getElementById('user_input').value);return false">
+
+         <input class="input" type="number"  id='user_input' name="id" placeholder="Insert ID (1-12)" max="12" min="0" required>
+           <input type="submit" name="Submit_to_fetch" value="Submit"/>
+      </form>
+
+    <main>
+
+    </main>
+{% endblock %}

@@ -8,10 +8,10 @@
 
 {% block tohen %}
   <div class="users2_container">
-    {% for user in users %}
-            <h1 class="users2_list">Name:&nbsp {{ user.name }} &nbsp Email:&nbsp {{ user.email }} &nbsp User Name:&nbsp {{ user.user_Name }}</h1>
-     {% endfor %}
-
+        <div class="get_users_jason">
+                <h1 class="get_jason_title">JSON Maker</h1>
+                  <p > <button class="get_jason_button"><a href="/assignment_4/users">generate</a></button></p>
+      </div>
             {% if message %}
                 <h1 class="insert_message">{{ message }}</h1>
             {% endif %}
@@ -25,8 +25,27 @@
                     <input type="submit" value="register">
                 </form>
             </div>
-
-
+            <div class="insert_form">
+                <h1 class="update_form">Update Form</h1>
+                <form action="/update_user" method="post">
+                    <input type="text" name="user_name" placeholder="User Name" autocomplete="on" required>
+                    <input type="password" name="password" placeholder="********" required>
+                    <input type="email" name="email" placeholder="find user by email" required>
+                    <input type="email" name="new_email" placeholder="new email"   required>
+                    <input type="text" name="name" placeholder=" Name" required>
+                    <input type="submit" value="update">
+                </form>
+            </div>
+            <div class="delete_form">
+                <h1 class="delete_form">Delete Form</h1>
+                <form action="/delete_user" method="post">
+                    <input type="email" name="email_to_delete" placeholder="user to delete email"   required>
+                    <input type="submit" value="delete">
+                </form>
+            </div>
+           {% for user in users %}
+            <h1 class="users2_list">Name:&nbsp {{ user.name }} &nbsp Email:&nbsp {{ user.email }} &nbsp User Name:&nbsp {{ user.user_Name }}</h1>
+           {% endfor %}
     </div>
 
 

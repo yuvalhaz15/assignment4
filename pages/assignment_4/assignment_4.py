@@ -1,6 +1,6 @@
 import os
 import mysql.connector
-from flask import Flask ,Blueprint, render_template, request, redirect, jsonify
+from flask import Flask, Blueprint, render_template, request, redirect, jsonify
 from flask import url_for
 from datetime import timedelta
 from flask import session
@@ -46,38 +46,42 @@ def genreal():
 
 @assignment_4.route('/insert', methods=['GET', 'POST'])
 def insert_user():
- if request.method == 'POST':
-    username = request.form['user_name']
+    if request.method == 'POST':
+        username = request.form['user_name']
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+        query = 'select * from users'
+        users = interact_db(query, query_type='fetch')
+        for user in users:
+            if email == user.email:
+                return render_template('assignment_4.html', users=users, message='email already exist')
+
+        query = "INSERT INTO users(user_Name, name, email, password) VALUES ('%s','%s', '%s', '%s')" % (username, name,
+                                                                                                        email, password)
+        interact_db(query=query, query_type='commit')
+        query = 'select * from users'
+        users = interact_db(query, query_type='fetch')
+        return render_template('assignment_4.html', users=users, message='user added ')
+
+
+@assignment_4.route('/update_user', methods=['GET', 'POST'])
+def update_user():
+    user_name = request.form['user_name']
     name = request.form['name']
-    email = request.form['email']
+    email = request.form['new_email']
     password = request.form['password']
     query = 'select * from users'
     users = interact_db(query, query_type='fetch')
     for user in users:
         if email == user.email:
-            return render_template('assignment_4.html', users=users,message='email already exist')
-
-    query = "INSERT INTO users(user_Name, name, email, password) VALUES ('%s','%s', '%s', '%s')" % (username, name,
-                                                                                                    email, password)
-    interact_db(query=query, query_type='commit')
-    query = 'select * from users'
-    users = interact_db(query, query_type='fetch')
-    return render_template('assignment_4.html', users=users, message='user added ')
-
-
-@assignment_4.route('/assignment_4/update_user', methods=['GET', 'POST'])
-def update_user():
-    user_name = request.form['username']
-    name = request.form['name']
-    email = request.form['email']
-    password = request.form['password']
-    query = "UPDATE users SET name ='%s',email ='%s',password='%s', user_Name='%s' WHERE email='%s';" % (
-        name, email, password, user_name, email)
-    interact_db(query=query, query_type='commit')
-    query = 'select * from users'
-    users_list = interact_db(query, query_type='fetch')
-    return render_template('assignment_4.html', users=users_list, message="changes made!")
-
+            query = "UPDATE users SET name ='%s',email ='%s',password='%s', user_Name='%s' WHERE email='%s';" % (
+                name, email, password, user_name, email)
+            interact_db(query=query, query_type='commit')
+            query = 'select * from users'
+            users_update = interact_db(query, query_type='fetch')
+            return render_template('assignment_4.html', users=users_update, message=f'{user_name} was updated')
+    return render_template('assignment_4.html', users=users, message='no user was found')
 
 @assignment_4.route('/assignment_4/update_userS', methods=['GET', 'POST'])
 def update_userS():
@@ -86,15 +90,19 @@ def update_userS():
     return render_template('updateusers.html', id=id)
 
 
-@assignment_4.route('/assignment_4/delete_user', methods=['GET', 'POST'])
-def delete_user_func():
-    user_id = request.form['id']
-    query = "DELETE FROM users WHERE id='%s';" % user_id
-    interact_db(query, query_type='commit')
+@assignment_4.route('/delete_user', methods=['GET', 'POST'])
+def delete_user():
+    email_to_delete = request.form['email_to_delete']
     query = 'select * from users'
-    users_list = interact_db(query, query_type='fetch')
-    return render_template('assignment_4.html', users=users_list, message="changes made!")
-
+    users_delete = interact_db(query, query_type='fetch')
+    for user in users_delete:
+        if email_to_delete == user.email:
+            query = "DELETE FROM users WHERE email ='%s';" % email_to_delete
+            interact_db(query, query_type='commit')
+            query = 'select * from users'
+            users_after_changes= interact_db(query, query_type='fetch')
+            return render_template('assignment_4.html', users=users_after_changes, message=f'{email_to_delete} was deleted')
+    return render_template('assignment_4.html', users=users_delete, message='no user was found')
 
 @assignment_4.route('/assignment_4/users', methods=['GET'])
 def get_users():
@@ -109,14 +117,17 @@ def get_users():
         })
     return jsonify(users_to_jason)
 
+@assignment_4.route('/fetch')
+def open_fetch_page():
+   return render_template('fetch.html')
 
-# @assignment_4.route('/assignment_4/outer_source', methods=['GET', 'POST'])
-# def outer_source():
-#     query = 'select * from users'
-#     users_list = interact_db(query, query_type='fetch')
-#     user_id = request.form['id']
-#     result = requests.get('https://reqres.in/api/users/' + user_id)
-#     return render_template('assignment_4.html', user_from_api=result.json()['data'], users=users_list)
+@assignment_4.route('/assignment_4/outer_source', methods=['GET', 'POST'])
+def outer_source():
+    query = 'select * from users'
+    users_list = interact_db(query, query_type='fetch')
+    user_id = request.form['id']
+    result = requests.get('https://reqres.in/api/users/' + user_id)
+    return render_template('assignment_4.html', user_from_api=result.json()['data'], users=users_list)
 #
 #
 # @assignment_4.route('/assignment_4/restapi_users/', methods=['GET'])
