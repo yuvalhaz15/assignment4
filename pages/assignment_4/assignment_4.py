@@ -83,6 +83,7 @@ def update_user():
             return render_template('assignment_4.html', users=users_update, message=f'{user_name} was updated')
     return render_template('assignment_4.html', users=users, message='no user was found')
 
+
 @assignment_4.route('/assignment_4/update_userS', methods=['GET', 'POST'])
 def update_userS():
     id = request.form['id']
@@ -100,9 +101,11 @@ def delete_user():
             query = "DELETE FROM users WHERE email ='%s';" % email_to_delete
             interact_db(query, query_type='commit')
             query = 'select * from users'
-            users_after_changes= interact_db(query, query_type='fetch')
-            return render_template('assignment_4.html', users=users_after_changes, message=f'{email_to_delete} was deleted')
+            users_after_changes = interact_db(query, query_type='fetch')
+            return render_template('assignment_4.html', users=users_after_changes,
+                                   message=f'{email_to_delete} was deleted')
     return render_template('assignment_4.html', users=users_delete, message='no user was found')
+
 
 @assignment_4.route('/assignment_4/users', methods=['GET'])
 def get_users():
@@ -117,17 +120,15 @@ def get_users():
         })
     return jsonify(users_to_jason)
 
-@assignment_4.route('/fetch')
-def open_fetch_page():
-   return render_template('fetch.html')
 
-@assignment_4.route('/assignment_4/outer_source', methods=['GET', 'POST'])
+@assignment_4.route('/assignment_4/outer_source', methods=['GET'])
 def outer_source():
-    query = 'select * from users'
-    users_list = interact_db(query, query_type='fetch')
-    user_id = request.form['id']
-    result = requests.get('https://reqres.in/api/users/' + user_id)
-    return render_template('assignment_4.html', user_from_api=result.json()['data'], users=users_list)
+    if 'id' in request.args:
+        user_id = request.args['id']
+        result = requests.get('https://reqres.in/api/users/' + user_id)
+        user_to_display = result.json()['data']
+        return render_template('fetch.html', user_to_display=user_to_display)
+    return render_template('fetch.html')
 #
 #
 # @assignment_4.route('/assignment_4/restapi_users/', methods=['GET'])

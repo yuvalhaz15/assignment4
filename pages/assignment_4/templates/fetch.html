@@ -9,16 +9,34 @@
 
 {% block tohen %}
 
-    <h1>Fetch - FrontEnd</h1>
+    <h1>Fetch - Frontend</h1>
 
 
-      <form action="#" id="fetch_frontend" onsubmit="return myFunction(document.getElementById('user_input').value);return false">
+      <form action="#" id="fetch_frontend" onsubmit="return myFunction(document.getElementById('user_input_frontend').value);return false">
 
-         <input class="input" type="number"  id='user_input' name="id" placeholder="Insert ID (1-12)" max="12" min="0" required>
-           <input type="submit" name="Submit_to_fetch" value="Submit"/>
+         <input class="input_frontend" type="number"  id='user_input_frontend' name="id" placeholder="Insert ID (1-6)" max="6" min="1" required>
+           <input type="submit" name="Submit_to_fetch_frontend" value="Submit"/>
+      </form>
+ <h1>Fetch - Backend</h1>
+
+
+      <form action="/assignment_4/outer_source" class="backend_fetch_form" >
+
+         <input class="input_backend" type="number"  id='user_input_backend' name="id" placeholder="Insert ID (1-6)" max="6" min="1" required>
+          <input type="submit" value="Submit"/>
       </form>
 
     <main>
 
     </main>
+
+    {% if user_to_display %}
+           <img src={{user_to_display["avatar"]}} alt="Profile_picture"/>
+            <div>
+             <span>{{user_to_display["first_name"]}} {{user_to_display["last_name"]}}</span>
+             <br>
+             <a href={{user_to_display["email"]}}>Send Email</a>
+            </div>
+
+    {% endif %}
 {% endblock %}
