@@ -53,12 +53,13 @@ def insert_user():
         password = request.form['password']
         query = 'select * from users'
         users = interact_db(query, query_type='fetch')
+
         for user in users:
             if email == user.email:
                 return render_template('assignment_4.html', users=users, message='email already exist')
 
         query = "INSERT INTO users(user_Name, name, email, password) VALUES ('%s','%s', '%s', '%s')" % (username, name,
-                                                                                                        email, password)
+                                                                                            email, password)
         interact_db(query=query, query_type='commit')
         query = 'select * from users'
         users = interact_db(query, query_type='fetch')
@@ -83,12 +84,6 @@ def update_user():
             return render_template('assignment_4.html', users=users_update, message=f'{user_name} was updated')
     return render_template('assignment_4.html', users=users, message='no user was found')
 
-
-@assignment_4.route('/assignment_4/update_userS', methods=['GET', 'POST'])
-def update_userS():
-    id = request.form['id']
-    print(id)
-    return render_template('updateusers.html', id=id)
 
 
 @assignment_4.route('/delete_user', methods=['GET', 'POST'])
@@ -129,32 +124,34 @@ def outer_source():
         user_to_display = result.json()['data']
         return render_template('fetch.html', user_to_display=user_to_display)
     return render_template('fetch.html')
-#
-#
-# @assignment_4.route('/assignment_4/restapi_users/', methods=['GET'])
-# def get_default_user():
-#     query = 'select * from users where id=1'
-#     user = interact_db(query, query_type='fetch')[0]
-#     users_dict = {
-#         'username': user.user_name,
-#         'email': user.email,
-#         'name': user.name
-#     }
-#     return jsonify(users_dict)
-#
-#
-# @assignment_4.route('/assignment_4/restapi_users/<int:USER_ID>', methods=['GET'])
-# def get_user(USER_ID):
-#     query = "select * from users where id='%s'" % USER_ID
-#     user = interact_db(query, query_type='fetch')[0]
-#     if user:
-#         users_dict = {
-#             'username': user.user_name,
-#             'email': user.email,
-#             'name': user.name
-#         }
-#         return jsonify(users_dict)
-#     return jsonify({
-#         'error': '404',
-#         'message': 'User not found!!'
-#     })
+
+
+@assignment_4.route('/assignment_4/restapi_users/', methods=['GET'])
+
+
+def get_default_user():
+    query = 'select * from users where id=5"'
+    user = interact_db(query, query_type='fetch')[0]
+    users_details = {
+        'username': user.user_Name,
+        'email': user.email,
+        'name': user.name
+    }
+    return jsonify(users_details)
+
+
+@assignment_4.route('/assignment_4/restapi_users/<int:USER_ID>', methods=['GET'])
+def get_user(USER_ID):
+    query = "select * from users where id='%s'" % USER_ID
+    user = interact_db(query, query_type='fetch')[0]
+    if user:
+        users_details = {
+            'username': user.user_Name,
+            'email': user.email,
+            'name': user.name
+        }
+        return jsonify(users_details)
+    return jsonify({
+        'error': '404',
+        'message': 'User not found!!'
+    })
