@@ -130,7 +130,7 @@ def outer_source():
 
 
 def get_default_user():
-    query = 'select * from users where id=5"'
+    query = 'select * from users where user_id=5'
     user = interact_db(query, query_type='fetch')[0]
     users_details = {
         'username': user.user_Name,
@@ -142,14 +142,15 @@ def get_default_user():
 
 @assignment_4.route('/assignment_4/restapi_users/<int:USER_ID>', methods=['GET'])
 def get_user(USER_ID):
-    query = "select * from users where id='%s'" % USER_ID
-    user = interact_db(query, query_type='fetch')[0]
-    if user:
-        users_details = {
-            'username': user.user_Name,
-            'email': user.email,
-            'name': user.name
-        }
+    query = "select * from users where user_id='%s'" % USER_ID
+    user = interact_db(query, query_type='fetch')
+    users_details=[]
+    for user_details in user:
+        users_details.append({
+            'username': user_details.user_Name,
+            'email': user_details.email,
+            'name': user_details.name
+        })
         return jsonify(users_details)
     return jsonify({
         'error': '404',
