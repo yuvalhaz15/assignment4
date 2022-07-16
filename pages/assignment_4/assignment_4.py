@@ -153,6 +153,5 @@ def get_user(USER_ID):
         })
         return jsonify(users_details)
     return jsonify({
-        'error': '404',
-        'message': 'User not found!!'
+        'message': ' id dont exist,user was  not found'
     })
